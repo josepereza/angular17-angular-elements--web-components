@@ -1,6 +1,19 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { createApplication } from '@angular/platform-browser';
+import { createCustomElement } from '@angular/elements';
+import { PruebaComponent } from './app/components/prueba/prueba.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+(async () => {
+
+  const app = await createApplication({
+    providers: [
+      /* your global providers here */
+    ],
+  });
+
+  const toogleElement = createCustomElement(PruebaComponent, {
+    injector: app.injector,
+  });
+
+  customElements.define('prueba-element', toogleElement);
+
+})();
